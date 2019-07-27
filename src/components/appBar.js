@@ -40,7 +40,7 @@ class AppBarComponent extends Component {
   };
 
   render() {
-    const { classes, enableMenu } = this.props;
+    const { classes, enableMenu, history } = this.props;
 
     return (
       <div className={classes.root}>
@@ -50,7 +50,9 @@ class AppBarComponent extends Component {
             <Typography variant="h6" className={classes.title}>
               Welcome To React Minimal Setup
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit" onClick={() => history.push('/signup')}>
+              Sign Up
+            </Button>
           </Toolbar>
         </AppBar>
       </div>

@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Route,
   Redirect,
+  Link,
   Switch,
 } from 'react-router-dom';
 
@@ -31,25 +32,39 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
         <CssBaseline>
           <Router>
-            <NavBar enableMenu={false} />
             <Switch>
               <Route
                 exact
                 path="/"
                 render={props => {
-                  return <SignIn />;
+                  return (
+                    <div>
+                      <NavBar {...props} enableMenu={false} />
+                      <SignIn {...props} />
+                    </div>
+                  );
                 }}
               />
               <Route
                 exact
                 path="/signup"
                 render={props => {
-                  return <SignUp />;
+                  return (
+                    <div>
+                      <NavBar {...props} enableMenu={false} />
+                      <SignUp {...props} />
+                    </div>
+                  );
                 }}
               />
               <Route
                 render={props => {
-                  return <NotFound />;
+                  return (
+                    <div>
+                      <NavBar {...props} enableMenu={false} />
+                      <NotFound {...props} />
+                    </div>
+                  );
                 }}
               />
             </Switch>

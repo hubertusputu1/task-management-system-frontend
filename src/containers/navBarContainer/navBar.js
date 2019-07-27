@@ -11,9 +11,7 @@ class NavBar extends Component {
   }
 
   render() {
-    const { enableMenu } = this.props;
-
-    return <AppBar enableMenu={enableMenu} />;
+    return <AppBar {...this.props} />;
   }
 }
 

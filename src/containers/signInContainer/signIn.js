@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Link } from 'react-router-dom';
 
 import { mapDispatch, mapState } from './signIn.controller';
 
@@ -18,7 +19,11 @@ class SignIn extends Component {
         <Typography variant={VARIANT_H5} text="Login Page" />
       </div>
     );
-    return <Paper childElement={childElement} />;
+    return (
+      <div>
+        <Paper childElement={childElement} />
+      </div>
+    );
   }
 }
 
