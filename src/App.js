@@ -13,6 +13,7 @@ import {
   CssBaseline,
 } from '@material-ui/core';
 
+import NavBar from './containers/navBarContainer';
 import SignIn from './containers/signInContainer';
 import SignUp from './containers/signUpContainer';
 import NotFound from './containers/notFoundContainer';
@@ -30,6 +31,7 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
         <CssBaseline>
           <Router>
+            <NavBar enableMenu={false} />
             <Switch>
               <Route
                 exact

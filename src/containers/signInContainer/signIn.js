@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import { mapDispatch, mapState } from './signIn.controller';
 import { connect } from 'react-redux';
+
+import { mapDispatch, mapState } from './signIn.controller';
+
+import Paper from '../../components/paper';
+import Typography from '../../components/typography';
+import { VARIANT_H5 } from '../../constants/typography.constant';
 
 class SignIn extends Component {
   constructor(props) {
@@ -8,11 +13,12 @@ class SignIn extends Component {
   }
 
   render() {
-    return (
+    const childElement = (
       <div>
-        <p>Sign In Page</p>
+        <Typography variant={VARIANT_H5} text="Login Page" />
       </div>
     );
+    return <Paper childElement={childElement} />;
   }
 }
 
