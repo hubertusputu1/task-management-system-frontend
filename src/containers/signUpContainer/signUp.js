@@ -83,13 +83,11 @@ class SignUp extends Component {
           type="password"
           onChangeFunction={e => this.handleChange('confirmPassword', e)}
         />
-        <div>
-          <Button
-            color={COLOR_PRIMARY}
-            childElement={TEXT_SIGN_UP}
-            variant={VARIANT_BUTTON_CONTAINED}
-          />
-        </div>
+        <Button
+          color={COLOR_PRIMARY}
+          childElement={TEXT_SIGN_UP}
+          variant={VARIANT_BUTTON_CONTAINED}
+        />
       </div>
     );
     return (

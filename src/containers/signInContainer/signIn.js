@@ -44,13 +44,11 @@ class SignIn extends Component {
           type="password"
           onChangeFunction={e => this.handleChange('password', e)}
         />
-        <div>
-          <Button
-            color={COLOR_PRIMARY}
-            childElement={TEXT_SIGN_IN}
-            variant={VARIANT_BUTTON_CONTAINED}
-          />
-        </div>
+        <Button
+          color={COLOR_PRIMARY}
+          childElement={TEXT_SIGN_IN}
+          variant={VARIANT_BUTTON_CONTAINED}
+        />
       </div>
     );
     return (
