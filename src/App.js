@@ -18,6 +18,13 @@ import NavBar from './containers/navBarContainer';
 import SignIn from './containers/signInContainer';
 import SignUp from './containers/signUpContainer';
 import NotFound from './containers/notFoundContainer';
+import { TITLE_MAIN } from './constants/navbar.constant';
+import {
+  TEXT_SIGN_IN,
+  TEXT_SIGN_OUT,
+  TEXT_SIGN_UP,
+} from './constants/typography.constant';
+import { PATH_SIGN_IN, PATH_SIGN_UP } from './constants/path.constant';
 
 const theme = createMuiTheme({
   palette: {
@@ -39,7 +46,13 @@ class App extends Component {
                 render={props => {
                   return (
                     <div>
-                      <NavBar {...props} enableMenu={false} />
+                      <NavBar
+                        {...props}
+                        title={TITLE_MAIN}
+                        buttonText={TEXT_SIGN_UP}
+                        enableMenu={false}
+                        path={PATH_SIGN_UP}
+                      />
                       <SignIn {...props} />
                     </div>
                   );
@@ -51,7 +64,13 @@ class App extends Component {
                 render={props => {
                   return (
                     <div>
-                      <NavBar {...props} enableMenu={false} />
+                      <NavBar
+                        {...props}
+                        title={TITLE_MAIN}
+                        buttonText={TEXT_SIGN_IN}
+                        enableMenu={false}
+                        path={PATH_SIGN_IN}
+                      />
                       <SignUp {...props} />
                     </div>
                   );
@@ -61,7 +80,11 @@ class App extends Component {
                 render={props => {
                   return (
                     <div>
-                      <NavBar {...props} enableMenu={false} />
+                      <NavBar
+                        {...props}
+                        title={TITLE_MAIN}
+                        enableMenu={false}
+                      />
                       <NotFound {...props} />
                     </div>
                   );

@@ -1,26 +1,60 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Link } from 'react-router-dom';
 
 import { mapDispatch, mapState } from './signIn.controller';
 
 import Paper from '../../components/paper';
+import TextField from '../../components/textField';
 import Typography from '../../components/typography';
-import { VARIANT_H5 } from '../../constants/typography.constant';
+import Button from '../../components/button';
+import { VARIANT_H6, TEXT_SIGN_IN } from '../../constants/typography.constant';
+import { COLOR_PRIMARY } from '../../constants/color.constant';
+import { VARIANT_BUTTON_CONTAINED } from '../../constants/button.constant';
 
 class SignIn extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      email: '',
+      password: '',
+    };
   }
 
+  handleChange = (name, event) => {
+    this.setState({ ...this.state, [name]: event.target.value });
+  };
+
   render() {
+    const { email, password } = this.state;
     const childElement = (
-      <div>
-        <Typography variant={VARIANT_H5} text="Login Page" />
+      <div style={{ textAlign: 'center' }}>
+        <Typography variant={VARIANT_H6} text={TEXT_SIGN_IN} />
+        <TextField
+          id="email"
+          label="Email"
+          value={email}
+          type="email"
+          onChangeFunction={e => this.handleChange('email', e)}
+        />
+        <TextField
+          id="password"
+          label="Password"
+          value={password}
+          type="password"
+          onChangeFunction={e => this.handleChange('password', e)}
+        />
+        <div>
+          <Button
+            color={COLOR_PRIMARY}
+            childElement={TEXT_SIGN_IN}
+            variant={VARIANT_BUTTON_CONTAINED}
+          />
+        </div>
       </div>
     );
     return (
-      <div>
+      <div style={{ width: '30%', margin: 'auto', marginTop: '2em' }}>
         <Paper childElement={childElement} />
       </div>
     );

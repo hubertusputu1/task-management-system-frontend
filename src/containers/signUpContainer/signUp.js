@@ -1,16 +1,100 @@
 import React, { Component } from 'react';
-import { mapDispatch, mapState } from './signUp.controller';
 import { connect } from 'react-redux';
+
+import { mapDispatch, mapState } from './signUp.controller';
+
+import Paper from '../../components/paper';
+import TextField from '../../components/textField';
+import Typography from '../../components/typography';
+import Button from '../../components/button';
+import Select from '../../components/select';
+import { VARIANT_H6, TEXT_SIGN_UP } from '../../constants/typography.constant';
+import { COLOR_PRIMARY } from '../../constants/color.constant';
+import { VARIANT_BUTTON_CONTAINED } from '../../constants/button.constant';
+import {
+  USER_ROLES_ADMIN,
+  USER_ROLES_EMPLOYEE,
+} from '../../constants/user.constant';
 
 class SignUp extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      userRole: USER_ROLES_ADMIN,
+    };
   }
 
+  handleChange = (name, event) => {
+    this.setState({ ...this.state, [name]: event.target.value });
+  };
+
   render() {
+    const { email, password, name, confirmPassword, userRole } = this.state;
+    const userRoles = [
+      {
+        value: USER_ROLES_ADMIN,
+        name: USER_ROLES_ADMIN,
+      },
+      {
+        value: USER_ROLES_EMPLOYEE,
+        name: USER_ROLES_EMPLOYEE,
+      },
+    ];
+
+    const childElement = (
+      <div style={{ textAlign: 'center' }}>
+        <Typography variant={VARIANT_H6} text={TEXT_SIGN_UP} />
+        <TextField
+          id="name"
+          label="Name"
+          value={name}
+          onChangeFunction={e => this.handleChange('name', e)}
+        />
+        <TextField
+          id="email"
+          label="Email"
+          value={email}
+          type="email"
+          onChangeFunction={e => this.handleChange('email', e)}
+        />
+        <Select
+          id="userRole"
+          name="User Role"
+          value={userRole}
+          onChangeFunction={e => this.handleChange('userRole', e)}
+          menuItems={userRoles}
+        />
+        <TextField
+          id="password"
+          label="Password"
+          value={password}
+          type="password"
+          onChangeFunction={e => this.handleChange('password', e)}
+        />
+        <TextField
+          id="confirmPassword"
+          label="Confirm Password"
+          value={confirmPassword}
+          type="password"
+          onChangeFunction={e => this.handleChange('confirmPassword', e)}
+        />
+        <div>
+          <Button
+            color={COLOR_PRIMARY}
+            childElement={TEXT_SIGN_UP}
+            variant={VARIANT_BUTTON_CONTAINED}
+          />
+        </div>
+      </div>
+    );
     return (
-      <div>
-        <p>Sign Up Page</p>
+      <div style={{ width: '30%', margin: 'auto', marginTop: '2em' }}>
+        <Paper childElement={childElement} />
       </div>
     );
   }
