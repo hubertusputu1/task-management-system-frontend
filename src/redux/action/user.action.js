@@ -1,8 +1,8 @@
-import { REQUEST_USER_DATA } from '../type/user';
+import { USER_SIGN_UP } from '../type/user.type';
 
-export const getUser = data => {
+export const createUser = data => {
   return {
-    type: REQUEST_USER_DATA,
+    type: USER_SIGN_UP,
     payload: data,
   };
 };

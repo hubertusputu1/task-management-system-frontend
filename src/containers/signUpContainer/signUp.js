@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as EmailValidator from 'email-validator';
 
 import { mapDispatch, mapState } from './signUp.controller';
 
@@ -31,6 +32,23 @@ class SignUp extends Component {
 
   handleChange = (name, event) => {
     this.setState({ ...this.state, [name]: event.target.value });
+  };
+
+  handleSubmit = () => {
+    const { name, email, password, confirmPassword, userRole } = this.state;
+    const { createUser } = this.props;
+
+    if (!name || !email || !password || !confirmPassword) {
+      return alert("all fields can't be empty");
+    }
+    if (!EmailValidator.validate(email)) {
+      return alert('email must be valid');
+    }
+    if (password !== confirmPassword) {
+      return alert("password doesn't match");
+    }
+    createUser({ name, email, password, userRole });
+    alert('user created');
   };
 
   render() {
@@ -87,6 +105,7 @@ class SignUp extends Component {
           color={COLOR_PRIMARY}
           childElement={TEXT_SIGN_UP}
           variant={VARIANT_BUTTON_CONTAINED}
+          onClickFunction={() => this.handleSubmit()}
         />
       </div>
     );

@@ -1,17 +1,18 @@
 import { put, call } from 'redux-saga/effects';
-import {
-  SHOW_USER_DATA,
-  FAILED_GET_USER_DATA,
-  SUCCESS_USER_DATA,
-} from '../type/user';
-import { apiGetUser } from './api/apiuser';
+import { USER_SIGN_UP_SUCCESS, USER_SIGN_UP_FAILED } from '../type/user.type';
+import { createUserAPI } from './api/user.api';
 
-export function* getUserData() {
+export function* createUser(action) {
   try {
-    const users = yield call(apiGetUser);
-    yield put({ type: SHOW_USER_DATA, payload: users });
-    yield put({ type: SUCCESS_USER_DATA, payload: 'Successfully get ' });
+    yield call(createUserAPI, action.payload);
+    yield put({
+      type: USER_SIGN_UP_SUCCESS,
+      payload: { message: 'success' },
+    });
   } catch (error) {
-    yield put({ type: FAILED_GET_USER_DATA, payload: 'Fatal ERROR' });
+    yield put({
+      type: USER_SIGN_UP_FAILED,
+      payload: { message: 'error' },
+    });
   }
 }

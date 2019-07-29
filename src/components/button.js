@@ -22,6 +22,7 @@ class ButtonComponent extends Component {
         color={color}
         variant={this.props.variant ? this.props.variant : ''}
         className={classes.button}
+        onClick={() => this.props.onClickFunction()}
       >
         {childElement}
       </Button>
