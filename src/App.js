@@ -17,6 +17,7 @@ import {
 import NavBar from './containers/navBarContainer';
 import SignIn from './containers/signInContainer';
 import SignUp from './containers/signUpContainer';
+import TaskPage from './containers/taskPageContainer';
 import NotFound from './containers/notFoundContainer';
 import { TITLE_MAIN } from './constants/navbar.constant';
 import {
@@ -24,7 +25,11 @@ import {
   TEXT_SIGN_OUT,
   TEXT_SIGN_UP,
 } from './constants/typography.constant';
-import { PATH_SIGN_IN, PATH_SIGN_UP } from './constants/path.constant';
+import {
+  PATH_SIGN_IN,
+  PATH_SIGN_UP,
+  PATH_SIGN_OUT,
+} from './constants/path.constant';
 
 const theme = createMuiTheme({
   palette: {
@@ -77,6 +82,24 @@ class App extends Component {
                 }}
               />
               <Route
+                exact
+                path="/task"
+                render={props => {
+                  return (
+                    <div>
+                      <NavBar
+                        {...props}
+                        title={TITLE_MAIN}
+                        buttonText={TEXT_SIGN_OUT}
+                        enableMenu={true}
+                        path={PATH_SIGN_OUT}
+                      />
+                      <TaskPage {...props} />
+                    </div>
+                  );
+                }}
+              />
+              <Route
                 render={props => {
                   return (
                     <div>
@@ -100,6 +123,7 @@ class App extends Component {
 
 export default connect(
   state => {
+    console.log('ini state ', state);
     return {};
   },
   null
