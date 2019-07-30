@@ -1,3 +1,6 @@
+import storage from 'redux-persist/lib/storage';
+import { persistReducer } from 'redux-persist';
+
 import {
   USER_SIGN_UP_SUCCESS,
   USER_SIGN_UP_FAILED,
@@ -11,7 +14,13 @@ const initialState = {
   message: null,
 };
 
-export default (state = initialState, action) => {
+const persistConfig = {
+  key: 'user',
+  storage,
+  whitelist: ['user'],
+};
+
+export default persistReducer(persistConfig, (state = initialState, action) => {
   switch (action.type) {
     case USER_SIGN_UP_SUCCESS:
       return {
@@ -41,4 +50,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+});
