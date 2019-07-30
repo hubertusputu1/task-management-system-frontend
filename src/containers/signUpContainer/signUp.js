@@ -36,7 +36,7 @@ class SignUp extends Component {
 
   handleSubmit = () => {
     const { name, email, password, confirmPassword, userRole } = this.state;
-    const { createUser } = this.props;
+    const { userSignUp } = this.props;
 
     if (!name || !email || !password || !confirmPassword) {
       return alert("all fields can't be empty");
@@ -47,7 +47,7 @@ class SignUp extends Component {
     if (password !== confirmPassword) {
       return alert("password doesn't match");
     }
-    createUser({ name, email, password, userRole });
+    userSignUp({ name, email, password, userRole });
     alert('user created');
   };
 

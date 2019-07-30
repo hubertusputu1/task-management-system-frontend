@@ -25,6 +25,25 @@ class SignIn extends Component {
     this.setState({ ...this.state, [name]: event.target.value });
   };
 
+  handleSubmitOnEnter = event => {
+    if (event.key === 'Enter') {
+      this.handleSubmit();
+    }
+  };
+
+  handleSubmit = () => {
+    const { email, password } = this.state;
+    const { userSignIn } = this.props;
+
+    if (!email) {
+      return alert("email can't be empty");
+    }
+    if (!password) {
+      return alert("password can't be empty");
+    }
+    userSignIn({ email, password });
+  };
+
   render() {
     const { email, password } = this.state;
     const childElement = (
@@ -36,6 +55,7 @@ class SignIn extends Component {
           value={email}
           type="email"
           onChangeFunction={e => this.handleChange('email', e)}
+          onKeyPressFunction={e => this.handleSubmitOnEnter(e)}
         />
         <TextField
           id="password"
@@ -43,11 +63,13 @@ class SignIn extends Component {
           value={password}
           type="password"
           onChangeFunction={e => this.handleChange('password', e)}
+          onKeyPressFunction={e => this.handleSubmitOnEnter(e)}
         />
         <Button
           color={COLOR_PRIMARY}
           childElement={TEXT_SIGN_IN}
           variant={VARIANT_BUTTON_CONTAINED}
+          onClickFunction={() => this.handleSubmit()}
         />
       </div>
     );

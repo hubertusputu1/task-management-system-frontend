@@ -5,9 +5,9 @@ import { Typography } from '@material-ui/core';
 const styles = theme => ({});
 
 class TypographyComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     const { variant, text } = this.props;

@@ -15,9 +15,9 @@ const styles = theme => ({
 });
 
 class TextFieldComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     const { classes, id, label, value, onChangeFunction } = this.props;
@@ -30,6 +30,11 @@ class TextFieldComponent extends Component {
         value={value}
         type={this.props.type ? this.props.type : ''}
         onChange={e => onChangeFunction(e)}
+        onKeyPress={
+          this.props.onKeyPressFunction
+            ? e => this.props.onKeyPressFunction(e)
+            : () => {}
+        }
         margin="normal"
       />
     );

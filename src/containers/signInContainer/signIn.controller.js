@@ -1,9 +1,13 @@
-// import { ActNavDismissError } from "../redux/action/action.navigation";
+import { userSignIn } from '../../redux/action/user.action';
 
 export const mapState = state => {
-  return {};
+  return {
+    message: state.user.message,
+  };
 };
 
-export const mapDispatch = dispatch => {
-  return {};
+export const mapDispatch = (dispatch, props) => {
+  return {
+    userSignIn: data => dispatch(userSignIn(data)),
+  };
 };

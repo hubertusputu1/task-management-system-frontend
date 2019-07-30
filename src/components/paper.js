@@ -9,9 +9,9 @@ const styles = theme => ({
 });
 
 class PaperComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     const { classes, childElement } = this.props;

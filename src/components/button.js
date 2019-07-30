@@ -10,9 +10,9 @@ const styles = theme => ({
 });
 
 class ButtonComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     const { classes, childElement, color } = this.props;
