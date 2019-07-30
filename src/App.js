@@ -49,7 +49,9 @@ class App extends Component {
                 exact
                 path="/"
                 render={props => {
-                  return (
+                  return this.props.token ? (
+                    <Redirect to={'/task'} push={true} />
+                  ) : (
                     <div>
                       <NavBar
                         {...props}
@@ -67,7 +69,9 @@ class App extends Component {
                 exact
                 path="/signup"
                 render={props => {
-                  return (
+                  return this.props.token ? (
+                    <Redirect to={'/task'} push={true} />
+                  ) : (
                     <div>
                       <NavBar
                         {...props}
@@ -123,8 +127,9 @@ class App extends Component {
 
 export default connect(
   state => {
-    console.log('ini state ', state);
-    return {};
+    return {
+      token: state.user.user.token,
+    };
   },
   null
 )(App);
