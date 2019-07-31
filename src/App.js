@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Route,
   Redirect,
-  Link,
   Switch,
 } from 'react-router-dom';
 
@@ -39,7 +38,62 @@ const theme = createMuiTheme({
 });
 
 class App extends Component {
+  renderDesktopHome = props => {
+    return (
+      <div>
+        <NavBar
+          {...props}
+          title={TITLE_MAIN}
+          buttonText={TEXT_SIGN_UP}
+          enableMenu={false}
+          onClickFunction={() => this.props.history.push(PATH_SIGN_UP)}
+        />
+        <SignIn {...props} />
+      </div>
+    );
+  };
+
+  renderDesktopSignup = props => {
+    return (
+      <div>
+        <NavBar
+          {...props}
+          title={TITLE_MAIN}
+          buttonText={TEXT_SIGN_IN}
+          enableMenu={false}
+          onClickFunction={() => this.props.history.push(PATH_SIGN_IN)}
+        />
+        <SignUp {...props} />
+      </div>
+    );
+  };
+
+  renderDesktopTask = props => {
+    return (
+      <div>
+        <NavBar
+          {...props}
+          title={TITLE_MAIN}
+          buttonText={TEXT_SIGN_OUT}
+          enableMenu={true}
+          onClickFunction={() => console.log('sign out')}
+        />
+        <TaskPage {...props} />
+      </div>
+    );
+  };
+
+  renderDesktopNotFound = props => {
+    return (
+      <div>
+        <NavBar {...props} title={TITLE_MAIN} enableMenu={false} />
+        <NotFound {...props} />
+      </div>
+    );
+  };
+
   render() {
+    let isDesktopView = true;
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline>
@@ -51,17 +105,10 @@ class App extends Component {
                 render={props => {
                   return this.props.token ? (
                     <Redirect to={'/task'} push={true} />
+                  ) : isDesktopView ? (
+                    this.renderDesktopHome(props)
                   ) : (
-                    <div>
-                      <NavBar
-                        {...props}
-                        title={TITLE_MAIN}
-                        buttonText={TEXT_SIGN_UP}
-                        enableMenu={false}
-                        path={PATH_SIGN_UP}
-                      />
-                      <SignIn {...props} />
-                    </div>
+                    'render mobile view'
                   );
                 }}
               />
@@ -71,17 +118,10 @@ class App extends Component {
                 render={props => {
                   return this.props.token ? (
                     <Redirect to={'/task'} push={true} />
+                  ) : isDesktopView ? (
+                    this.renderDesktopSignup(props)
                   ) : (
-                    <div>
-                      <NavBar
-                        {...props}
-                        title={TITLE_MAIN}
-                        buttonText={TEXT_SIGN_IN}
-                        enableMenu={false}
-                        path={PATH_SIGN_IN}
-                      />
-                      <SignUp {...props} />
-                    </div>
+                    'render mobile view'
                   );
                 }}
               />
@@ -89,32 +129,16 @@ class App extends Component {
                 exact
                 path="/task"
                 render={props => {
-                  return (
-                    <div>
-                      <NavBar
-                        {...props}
-                        title={TITLE_MAIN}
-                        buttonText={TEXT_SIGN_OUT}
-                        enableMenu={true}
-                        path={PATH_SIGN_OUT}
-                      />
-                      <TaskPage {...props} />
-                    </div>
-                  );
+                  return isDesktopView
+                    ? this.renderDesktopTask(props)
+                    : 'render mobile view';
                 }}
               />
               <Route
                 render={props => {
-                  return (
-                    <div>
-                      <NavBar
-                        {...props}
-                        title={TITLE_MAIN}
-                        enableMenu={false}
-                      />
-                      <NotFound {...props} />
-                    </div>
-                  );
+                  return isDesktopView
+                    ? this.renderDesktopNotFound(props)
+                    : 'render mobile view';
                 }}
               />
             </Switch>
