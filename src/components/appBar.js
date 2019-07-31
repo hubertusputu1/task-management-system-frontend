@@ -41,9 +41,9 @@ class AppBarComponent extends Component {
     );
   };
 
-  renderRightButton = (buttonText, path, history) => {
+  renderRightButton = (buttonText, onClickFunction) => {
     return (
-      <Button color="inherit" onClick={() => history.push(path)}>
+      <Button color="inherit" onClick={() => onClickFunction()}>
         {buttonText}
       </Button>
     );
@@ -61,10 +61,9 @@ class AppBarComponent extends Component {
     const {
       classes,
       enableMenu,
-      history,
       title,
       buttonText,
-      path,
+      onClickFunction,
     } = this.props;
 
     return (
@@ -73,8 +72,8 @@ class AppBarComponent extends Component {
           <Toolbar>
             {enableMenu ? this.renderMenuButton(classes) : ''}
             {this.renderTitleBar(VARIANT_H5, classes, title)}
-            {path && buttonText
-              ? this.renderRightButton(buttonText, path, history)
+            {buttonText
+              ? this.renderRightButton(buttonText, onClickFunction)
               : ''}
           </Toolbar>
         </AppBar>
