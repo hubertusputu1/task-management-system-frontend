@@ -43,7 +43,7 @@ class App extends Component {
           title={TITLE_MAIN}
           buttonText={TEXT_SIGN_UP}
           enableMenu={false}
-          onClickFunction={() => this.props.history.push(PATH_SIGN_UP)}
+          onClickFunction={() => props.history.push(PATH_SIGN_UP)}
         />
         <SignIn {...props} />
       </div>
@@ -58,7 +58,7 @@ class App extends Component {
           title={TITLE_MAIN}
           buttonText={TEXT_SIGN_IN}
           enableMenu={false}
-          onClickFunction={() => this.props.history.push(PATH_SIGN_IN)}
+          onClickFunction={() => props.history.push(PATH_SIGN_IN)}
         />
         <SignUp {...props} />
       </div>
