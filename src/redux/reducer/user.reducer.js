@@ -6,6 +6,8 @@ import {
   USER_SIGN_UP_FAILED,
   USER_SIGN_IN_SUCCESS,
   USER_SIGN_IN_FAILED,
+  USER_SIGN_OUT_SUCCESS,
+  USER_SIGN_OUT_FAILED,
 } from '../type/user.type';
 
 const initialState = {
@@ -42,6 +44,19 @@ export default persistReducer(persistConfig, (state = initialState, action) => {
         user: action.payload.user,
       };
     case USER_SIGN_IN_FAILED:
+      return {
+        ...state,
+        loading: false,
+        message: action.payload.message,
+      };
+    case USER_SIGN_OUT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: action.payload.message,
+        user: action.payload.user,
+      };
+    case USER_SIGN_OUT_FAILED:
       return {
         ...state,
         loading: false,

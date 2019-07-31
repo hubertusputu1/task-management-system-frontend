@@ -24,11 +24,8 @@ import {
   TEXT_SIGN_OUT,
   TEXT_SIGN_UP,
 } from './constants/typography.constant';
-import {
-  PATH_SIGN_IN,
-  PATH_SIGN_UP,
-  PATH_SIGN_OUT,
-} from './constants/path.constant';
+import { PATH_SIGN_IN, PATH_SIGN_UP } from './constants/path.constant';
+import { userSignOut } from './redux/action/user.action';
 
 const theme = createMuiTheme({
   palette: {
@@ -76,7 +73,7 @@ class App extends Component {
           title={TITLE_MAIN}
           buttonText={TEXT_SIGN_OUT}
           enableMenu={true}
-          onClickFunction={() => console.log('sign out')}
+          onClickFunction={() => this.props.userSignOut(props.token)}
         />
         <TaskPage {...props} />
       </div>
@@ -129,9 +126,15 @@ class App extends Component {
                 exact
                 path="/task"
                 render={props => {
-                  return isDesktopView
-                    ? this.renderDesktopTask(props)
-                    : 'render mobile view';
+                  return this.props.token ? (
+                    isDesktopView ? (
+                      this.renderDesktopTask(props)
+                    ) : (
+                      'render mobile view'
+                    )
+                  ) : (
+                    <Redirect to={'/'} push={true} />
+                  );
                 }}
               />
               <Route
@@ -155,5 +158,9 @@ export default connect(
       token: state.user.user.token,
     };
   },
-  null
+  dispatchEvent => {
+    return {
+      userSignOut: data => dispatchEvent(userSignOut(data)),
+    };
+  }
 )(App);

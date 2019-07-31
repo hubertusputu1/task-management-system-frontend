@@ -4,6 +4,8 @@ import {
   USER_SIGN_UP_FAILED,
   USER_SIGN_IN_SUCCESS,
   USER_SIGN_IN_FAILED,
+  USER_SIGN_OUT_SUCCESS,
+  USER_SIGN_OUT_FAILED,
 } from '../type/user.type';
 import { userSignUpAPI, userSignInAPI } from './api/user.api';
 
@@ -32,6 +34,20 @@ export function* userSignIn(action) {
   } catch (error) {
     yield put({
       type: USER_SIGN_IN_FAILED,
+      payload: { message: 'error' },
+    });
+  }
+}
+
+export function* userSignOut(action) {
+  try {
+    yield put({
+      type: USER_SIGN_OUT_SUCCESS,
+      payload: { message: 'success', user: {} },
+    });
+  } catch (error) {
+    yield put({
+      type: USER_SIGN_OUT_FAILED,
       payload: { message: 'error' },
     });
   }
