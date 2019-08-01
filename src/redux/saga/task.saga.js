@@ -8,6 +8,8 @@ import {
   TASK_EDIT_SUCCESS,
   TASK_FETCH_FAILED,
   TASK_FETCH_SUCCESS,
+  TASK_GET_SINGLE_FAILED,
+  TASK_GET_SINGLE_SUCCESS,
 } from '../type/task.type';
 import {
   taskCreateAPI,
@@ -18,24 +20,65 @@ import {
 } from './api/task.api';
 
 export function* createTask(action) {
-  // try {
-  //   yield call(taskCreateAPI, action.payload);
-  //   yield put({
-  //     type: USER_SIGN_UP_SUCCESS,
-  //     payload: { message: 'success' },
-  //   });
-  // } catch (error) {
-  //   yield put({
-  //     type: USER_SIGN_UP_FAILED,
-  //     payload: { message: 'error' },
-  //   });
-  // }
+  try {
+    const newTask = yield call(taskCreateAPI, action.payload);
+    yield put({
+      type: TASK_CREATE_SUCCESS,
+      payload: { message: 'success', task: newTask.task },
+    });
+  } catch (error) {
+    yield put({
+      type: TASK_CREATE_FAILED,
+      payload: { message: 'error' },
+    });
+  }
 }
 
-export function* deleteTask(action) {}
+export function* deleteTask(action) {
+  try {
+    yield call(taskDeleteAPI, action.payload);
+    yield put({
+      type: TASK_DELETE_SUCCESS,
+      payload: { message: 'success', _id: action.payload._id },
+    });
+  } catch (error) {
+    yield put({
+      type: TASK_DELETE_FAILED,
+      payload: { message: 'error' },
+    });
+  }
+}
 
-export function* editTask(action) {}
+export function* editTask(action) {
+  try {
+    yield call(taskEditAPI, action.payload);
+    let task = action.payload;
+    delete task.token;
+    yield put({
+      type: TASK_EDIT_SUCCESS,
+      payload: { message: 'success', task },
+    });
+  } catch (error) {
+    yield put({
+      type: TASK_EDIT_FAILED,
+      payload: { message: 'error' },
+    });
+  }
+}
 
-export function* fetchTask(action) {}
+export function* fetchTask(action) {
+  try {
+    const tasks = yield call(taskFetchAPI, action.payload);
+    yield put({
+      type: TASK_FETCH_SUCCESS,
+      payload: { message: 'success', tasks },
+    });
+  } catch (error) {
+    yield put({
+      type: TASK_FETCH_FAILED,
+      payload: { message: 'error' },
+    });
+  }
+}
 
-export function* getSingleTask(action) {}
+// export function* getSingleTask(action) {}

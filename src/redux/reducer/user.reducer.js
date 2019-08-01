@@ -44,6 +44,7 @@ export default persistReducer(persistConfig, (state = initialState, action) => {
         loading: false,
         message: action.payload.message,
       };
+
     case USER_SIGN_IN:
       return {
         ...state,
@@ -62,6 +63,7 @@ export default persistReducer(persistConfig, (state = initialState, action) => {
         loading: false,
         message: action.payload.message,
       };
+
     case USER_SIGN_OUT:
       return {
         ...state,
