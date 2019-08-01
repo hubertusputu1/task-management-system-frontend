@@ -8,15 +8,12 @@ import {
   TASK_EDIT_SUCCESS,
   TASK_FETCH_FAILED,
   TASK_FETCH_SUCCESS,
-  TASK_GET_SINGLE_FAILED,
-  TASK_GET_SINGLE_SUCCESS,
 } from '../type/task.type';
 import {
   taskCreateAPI,
   taskDeleteAPI,
   taskEditAPI,
   taskFetchAPI,
-  taskGetSingleAPI,
 } from './api/task.api';
 
 export function* createTask(action) {
@@ -80,5 +77,3 @@ export function* fetchTask(action) {
     });
   }
 }
-
-// export function* getSingleTask(action) {}
