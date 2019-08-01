@@ -17,7 +17,7 @@ import {
 
 const initialState = {
   loading: false,
-  task: [],
+  tasks: [],
   message: null,
 };
 
@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        task: state.task.concat(action.payload.task),
+        tasks: state.tasks.concat(action.payload.task),
         message: action.payload.message,
       };
     case TASK_CREATE_FAILED:
@@ -48,13 +48,13 @@ export default (state = initialState, action) => {
         loading: true,
       };
     case TASK_DELETE_SUCCESS:
-      let deletedTask = _.remove(state.task, task => {
+      let deletedTask = _.remove(state.tasks, task => {
         return task._id !== action.payload._id;
       });
       return {
         ...state,
         loading: false,
-        task: deletedTask,
+        tasks: deletedTask,
         message: action.payload.message,
       };
     case TASK_DELETE_FAILED:
@@ -70,13 +70,13 @@ export default (state = initialState, action) => {
         loading: true,
       };
     case TASK_EDIT_SUCCESS:
-      let editedTask = _.remove(state.task, task => {
+      let editedTask = _.remove(state.tasks, task => {
         return task._id !== action.payload.task._id;
       });
       return {
         ...state,
         loading: false,
-        task: editedTask.concat(action.payload.task),
+        tasks: editedTask.concat(action.payload.task),
         message: action.payload.message,
       };
     case TASK_EDIT_FAILED:
@@ -95,7 +95,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        task: action.payload.tasks,
+        tasks: action.payload.tasks,
         message: action.payload.message,
       };
     case TASK_FETCH_FAILED:
