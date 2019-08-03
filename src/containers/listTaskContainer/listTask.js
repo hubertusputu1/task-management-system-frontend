@@ -190,8 +190,8 @@ class ListTask extends Component {
 
     return (
       <List className={classes.root} subheader={<li />}>
-        <li className={classes.listSection}>
-          <ul className={classes.ul}>
+        <li key={`li-${status}`} className={classes.listSection}>
+          <ul key={`ul-${status}`} className={classes.ul}>
             <ListSubheader>
               <div>
                 {status} tasks

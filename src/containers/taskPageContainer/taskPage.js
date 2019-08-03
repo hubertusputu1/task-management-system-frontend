@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -43,7 +44,30 @@ class TaskPage extends Component {
             <Grid item xs={4}>
               <ListTask
                 status={STATUS_NEW}
-                tasks={this.props.tasks}
+                tasks={_.filter(
+                  this.props.tasks,
+                  task => task.status === STATUS_NEW
+                )}
+                user={user}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ListTask
+                status={STATUS_IN_PROGRESS}
+                tasks={_.filter(
+                  this.props.tasks,
+                  task => task.status === STATUS_IN_PROGRESS
+                )}
+                user={user}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ListTask
+                status={STATUS_COMPLETED}
+                tasks={_.filter(
+                  this.props.tasks,
+                  task => task.status === STATUS_COMPLETED
+                )}
                 user={user}
               />
             </Grid>
