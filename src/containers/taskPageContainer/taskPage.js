@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { DndProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+import Grid from '@material-ui/core/Grid';
 
 import { mapDispatch, mapState } from './taskPage.controller';
 
-import Paper from '../../components/paper';
-import TextField from '../../components/textField';
-import Typography from '../../components/typography';
-import Button from '../../components/button';
-import { VARIANT_H6, TEXT_SIGN_IN } from '../../constants/typography.constant';
-import { COLOR_PRIMARY } from '../../constants/color.constant';
-import { VARIANT_BUTTON_CONTAINED } from '../../constants/button.constant';
+import ListTask from '../listTaskContainer';
+import {
+  STATUS_COMPLETED,
+  STATUS_IN_PROGRESS,
+  STATUS_NEW,
+} from '../../constants/task.constant';
 
 class TaskPage extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      title: '',
-      description: '',
-    };
   }
 
   fetchTasks = () => {
@@ -27,35 +24,29 @@ class TaskPage extends Component {
     fetchTask({ token });
   };
 
-  createTask = () => {
-    const { token, userId, createTask } = this.props;
-    const { title, description } = this.state;
-
-    createTask({ token, userId, title, description });
-  };
-
-  deleteTask = _id => {
-    const { token, deleteTask } = this.props;
-
-    deleteTask({ token, _id });
-  };
-
-  editTask = (_id, status) => {
-    const { token, editTask } = this.props;
-    const { title, description } = this.state;
-
-    editTask({ token, _id, status, title, description });
-  };
-
   render() {
-    const childElement = (
-      <div style={{ textAlign: 'center' }}>
-        <Typography variant={VARIANT_H6} text="TASK PAGE" />
-      </div>
-    );
+    console.log('ini props ', this.props);
+    const { user } = this.props;
+    const tasks = [0, 1, 2, 3, 4, 5, 6, 8, 9, 10];
     return (
-      <div style={{ width: '30%', margin: 'auto', marginTop: '2em' }}>
-        <Paper childElement={childElement} />
+      <div
+        style={{
+          width: '97%',
+          margin: 'auto',
+          marginTop: '2em',
+        }}
+      >
+        <DndProvider backend={HTML5Backend}>
+          <Grid container spacing={3}>
+            <Grid item xs={4}>
+              <ListTask
+                status={STATUS_NEW}
+                tasks={this.props.tasks}
+                user={user}
+              />
+            </Grid>
+          </Grid>
+        </DndProvider>
       </div>
     );
   }

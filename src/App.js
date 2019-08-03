@@ -73,9 +73,9 @@ class App extends Component {
           title={TITLE_MAIN}
           buttonText={TEXT_SIGN_OUT}
           enableMenu={true}
-          onClickFunction={() => this.props.userSignOut(props.token)}
+          onClickFunction={() => this.props.userSignOut(this.props.user.token)}
         />
-        <TaskPage {...props} />
+        <TaskPage {...props} user={this.props.user} />
       </div>
     );
   };
@@ -100,7 +100,7 @@ class App extends Component {
                 exact
                 path="/"
                 render={props => {
-                  return this.props.token ? (
+                  return this.props.user.token ? (
                     <Redirect to={'/task'} push={true} />
                   ) : isDesktopView ? (
                     this.renderDesktopHome(props)
@@ -113,7 +113,7 @@ class App extends Component {
                 exact
                 path="/signup"
                 render={props => {
-                  return this.props.token ? (
+                  return this.props.user.token ? (
                     <Redirect to={'/task'} push={true} />
                   ) : isDesktopView ? (
                     this.renderDesktopSignup(props)
@@ -126,7 +126,7 @@ class App extends Component {
                 exact
                 path="/task"
                 render={props => {
-                  return this.props.token ? (
+                  return this.props.user.token ? (
                     isDesktopView ? (
                       this.renderDesktopTask(props)
                     ) : (
@@ -155,7 +155,7 @@ class App extends Component {
 export default connect(
   state => {
     return {
-      token: state.user.user.token,
+      user: state.user.user,
     };
   },
   dispatchEvent => {

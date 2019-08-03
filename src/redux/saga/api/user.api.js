@@ -26,3 +26,10 @@ export const userSignInAPI = payload => {
     })
     .then(res => res.data);
 };
+
+export const userFetchAPI = payload => {
+  const { token } = payload;
+  return axios
+    .get(ApiUrl('api/v1/users'), HeaderToken(token))
+    .then(res => res.data);
+};

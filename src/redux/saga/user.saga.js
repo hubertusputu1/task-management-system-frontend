@@ -39,6 +39,21 @@ export function* userSignIn(action) {
   }
 }
 
+// export function* userFetch(action) {
+//   try {
+//     const resultSignInAPI = yield call(userSignInAPI, action.payload);
+//     yield put({
+//       type: USER_SIGN_IN_SUCCESS,
+//       payload: { message: 'success', user: resultSignInAPI.user },
+//     });
+//   } catch (error) {
+//     yield put({
+//       type: USER_SIGN_IN_FAILED,
+//       payload: { message: 'error' },
+//     });
+//   }
+// }
+
 export function* userSignOut(action) {
   try {
     yield put({

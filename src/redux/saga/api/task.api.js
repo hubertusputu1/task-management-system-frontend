@@ -9,7 +9,7 @@ export const taskFetchAPI = payload => {
 };
 
 export const taskCreateAPI = payload => {
-  const { title, description, createdBy, token } = payload;
+  const { title, description, createdBy, status, assignedTo, token } = payload;
   return axios
     .post(
       ApiUrl('api/v1/tasks'),
@@ -18,6 +18,8 @@ export const taskCreateAPI = payload => {
           title,
           description,
           createdBy,
+          status,
+          assignedTo,
         },
       },
       HeaderToken(token)
