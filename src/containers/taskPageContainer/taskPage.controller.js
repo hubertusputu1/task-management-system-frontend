@@ -1,13 +1,21 @@
-import { userSignIn } from '../../redux/action/user.action';
+import {
+  createTask,
+  deleteTask,
+  fetchTask,
+  editTask,
+} from '../../redux/action/task.action';
 
 export const mapState = state => {
   return {
-    message: state.user.message,
+    tasks: state.task.tasks,
   };
 };
 
 export const mapDispatch = (dispatch, props) => {
   return {
-    userSignIn: data => dispatch(userSignIn(data)),
+    createTask: data => dispatch(createTask(data)),
+    deleteTask: data => dispatch(deleteTask(data)),
+    fetchTask: data => dispatch(fetchTask(data)),
+    editTask: data => dispatch(editTask(data)),
   };
 };

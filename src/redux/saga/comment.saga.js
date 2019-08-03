@@ -10,7 +10,6 @@ import {
 import {
   commentCreateAPI,
   commentDeleteAPI,
-  commentEditAPI,
   commentFetchAPI,
 } from './api/comment.api';
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { mapDispatch, mapState } from './taskPage.controller';
+import { mapDispatch, mapState } from './commentPage.controller';
 
 import Paper from '../../components/paper';
 import TextField from '../../components/textField';
@@ -11,40 +11,32 @@ import { VARIANT_H6, TEXT_SIGN_IN } from '../../constants/typography.constant';
 import { COLOR_PRIMARY } from '../../constants/color.constant';
 import { VARIANT_BUTTON_CONTAINED } from '../../constants/button.constant';
 
-class TaskPage extends Component {
+class CommentPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      title: '',
-      description: '',
+      comment: '',
     };
   }
 
-  fetchTasks = () => {
-    const { token, fetchTask } = this.props;
+  fetchComments = () => {
+    const { token, taskId, fetchComment } = this.props;
 
-    fetchTask({ token });
+    fetchComment({ token, taskId });
   };
 
-  createTask = () => {
-    const { token, userId, createTask } = this.props;
-    const { title, description } = this.state;
+  onSubmitComment = () => {
+    const { token, taskId, userId, createComment } = this.props;
+    const { comment } = this.state;
 
-    createTask({ token, userId, title, description });
+    createComment({ token, taskId, userId, text: comment });
   };
 
-  deleteTask = _id => {
-    const { token, deleteTask } = this.props;
+  onDeleteComment = _id => {
+    const { token, deleteComment } = this.props;
 
-    deleteTask({ token, _id });
-  };
-
-  editTask = (_id, status) => {
-    const { token, editTask } = this.props;
-    const { title, description } = this.state;
-
-    editTask({ token, _id, status, title, description });
+    deleteComment({ _id, token });
   };
 
   render() {
@@ -64,4 +56,4 @@ class TaskPage extends Component {
 export default connect(
   mapState,
   mapDispatch
-)(TaskPage);
+)(CommentPage);
