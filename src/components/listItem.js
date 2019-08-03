@@ -16,8 +16,8 @@ class listItem extends Component {
   render() {
     const { classes, task } = this.props;
     return (
-      <ListItem className={classes.listItem} key={`item-${1}-${task}`} button>
-        <ListItemText primary={`Item ${task}`} />
+      <ListItem className={classes.listItem} key={task._id} button>
+        <ListItemText primary={task.title} />
         <ListItemSecondaryAction>
           <IconButton edge="end" aria-label="comments">
             <DeleteIcon />

@@ -19,15 +19,17 @@ class TaskPage extends Component {
   }
 
   fetchTasks = () => {
-    const { token, fetchTask } = this.props;
+    const { user, fetchTask } = this.props;
 
-    fetchTask({ token });
+    fetchTask({ token: user.token });
+  };
+
+  componentDidMount = () => {
+    this.fetchTasks();
   };
 
   render() {
-    console.log('ini props ', this.props);
     const { user } = this.props;
-    const tasks = [0, 1, 2, 3, 4, 5, 6, 8, 9, 10];
     return (
       <div
         style={{

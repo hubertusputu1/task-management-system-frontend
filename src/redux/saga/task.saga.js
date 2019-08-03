@@ -65,10 +65,10 @@ export function* editTask(action) {
 
 export function* fetchTask(action) {
   try {
-    const tasks = yield call(taskFetchAPI, action.payload);
+    const tasksResult = yield call(taskFetchAPI, action.payload);
     yield put({
       type: TASK_FETCH_SUCCESS,
-      payload: { message: 'success', tasks },
+      payload: { message: 'success', tasks: tasksResult.tasks },
     });
   } catch (error) {
     yield put({
