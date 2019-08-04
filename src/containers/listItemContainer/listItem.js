@@ -22,6 +22,8 @@ import {
   STATUS_NEW,
 } from '../../constants/task.constant';
 
+import { USER_ROLES_ADMIN } from '../../constants/user.constant';
+
 const styles = theme => ({});
 
 class ListItemContainer extends Component {
@@ -169,7 +171,7 @@ class ListItemContainer extends Component {
   };
 
   render() {
-    const { classes, task } = this.props;
+    const { classes, task, user } = this.props;
     return (
       <ListItem className={classes.listItem} key={task._id} button>
         <ListItemText primary={task.title} />
@@ -181,13 +183,17 @@ class ListItemContainer extends Component {
           >
             <EditIcon />
           </IconButton>
-          <IconButton
-            edge="end"
-            aria-label="delete"
-            onClick={() => this.deleteTask(task._id)}
-          >
-            <DeleteIcon />
-          </IconButton>
+          {user.userRole === USER_ROLES_ADMIN ? (
+            <IconButton
+              edge="end"
+              aria-label="delete"
+              onClick={() => this.deleteTask(task._id)}
+            >
+              <DeleteIcon />
+            </IconButton>
+          ) : (
+            ''
+          )}
           <DialogComponent
             handleClose={this.handleCloseModal}
             open={this.state.open}
