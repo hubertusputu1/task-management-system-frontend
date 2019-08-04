@@ -13,7 +13,6 @@ import { mapDispatch, mapState } from './listTask.controller';
 import ListItem from '../listItemContainer';
 import DialogComponent from '../../components/dialog';
 import TextField from '../../components/textField';
-import Typography from '../../components/typography';
 import Select from '../../components/select';
 
 import {
@@ -145,19 +144,6 @@ class ListTask extends Component {
       status,
       assignedTo,
     });
-  };
-
-  deleteTask = _id => {
-    const { token, deleteTask } = this.props;
-
-    deleteTask({ token, _id });
-  };
-
-  editTask = (_id, status) => {
-    const { token, editTask } = this.props;
-    const { title, description } = this.state;
-
-    editTask({ token, _id, status, title, description });
   };
 
   handleOpenModal = () => {

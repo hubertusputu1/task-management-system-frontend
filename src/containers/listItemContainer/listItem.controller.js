@@ -1,4 +1,4 @@
-import { deleteTask } from '../../redux/action/task.action';
+import { deleteTask, editTask } from '../../redux/action/task.action';
 
 export const mapState = state => {
   return {};
@@ -7,5 +7,6 @@ export const mapState = state => {
 export const mapDispatch = (dispatch, props) => {
   return {
     deleteTask: data => dispatch(deleteTask(data)),
+    editTask: data => dispatch(editTask(data)),
   };
 };
