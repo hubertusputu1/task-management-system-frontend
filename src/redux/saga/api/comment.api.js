@@ -28,6 +28,6 @@ export const commentCreateAPI = payload => {
 export const commentDeleteAPI = payload => {
   const { _id, token } = payload;
   return axios
-    .delete(ApiUrl(`api/v1/comments/${_id}`), {}, HeaderToken(token))
+    .delete(ApiUrl(`api/v1/comments/${_id}`), HeaderToken(token))
     .then(res => res.data);
 };

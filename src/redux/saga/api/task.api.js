@@ -48,7 +48,7 @@ export const taskEditAPI = payload => {
 export const taskDeleteAPI = payload => {
   const { _id, token } = payload;
   return axios
-    .delete(ApiUrl(`api/v1/tasks/${_id}`), {}, HeaderToken(token))
+    .delete(ApiUrl(`api/v1/tasks/${_id}`), HeaderToken(token))
     .then(res => res.data);
 };
 
