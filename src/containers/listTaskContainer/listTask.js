@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 
 import { mapDispatch, mapState } from './listTask.controller';
 
-import ListItem from '../../components/listItem';
+import ListItem from '../listItemContainer';
 import DialogComponent from '../../components/dialog';
 import TextField from '../../components/textField';
 import Typography from '../../components/typography';
@@ -21,7 +21,6 @@ import {
   STATUS_IN_PROGRESS,
   STATUS_NEW,
 } from '../../constants/task.constant';
-import { VARIANT_H6, TEXT_SIGN_IN } from '../../constants/typography.constant';
 
 const styles = theme => ({
   root: {
@@ -186,7 +185,7 @@ class ListTask extends Component {
   };
 
   render() {
-    const { classes, tasks, status } = this.props;
+    const { classes, tasks, status, user } = this.props;
 
     return (
       <List className={classes.root} subheader={<li />}>
@@ -206,7 +205,7 @@ class ListTask extends Component {
               </div>
             </ListSubheader>
             {tasks.map(task => (
-              <ListItem task={task} key={task} />
+              <ListItem task={task} key={task} user={user} />
             ))}
           </ul>
         </li>
