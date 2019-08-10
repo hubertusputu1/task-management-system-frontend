@@ -191,7 +191,7 @@ class ListTask extends Component {
               </div>
             </ListSubheader>
             {tasks.map(task => (
-              <ListItem task={task} key={task} user={user} />
+              <ListItem task={task} key={task._id} user={user} />
             ))}
           </ul>
         </li>
