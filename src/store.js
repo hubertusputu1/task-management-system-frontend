@@ -2,8 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from './redux/reducer/index';
 import IndexSaga from './redux/saga/index';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { persistStore } from 'redux-persist';
 
 import { createBrowserHistory } from 'history';
 import { routerMiddleware } from 'connected-react-router';

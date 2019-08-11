@@ -3,10 +3,6 @@ import { mapDispatch, mapState } from './notFound.controller';
 import { connect } from 'react-redux';
 
 class NotFound extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div>

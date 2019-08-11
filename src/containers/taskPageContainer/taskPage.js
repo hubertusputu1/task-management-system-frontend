@@ -15,10 +15,6 @@ import {
 } from '../../constants/task.constant';
 
 class TaskPage extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   fetchTasks = () => {
     const { user, fetchTask } = this.props;
 
@@ -43,7 +39,7 @@ class TaskPage extends Component {
           <Grid container spacing={3}>
             <Grid item xs={4}>
               <ListTask
-                status={STATUS_NEW}
+                status="New"
                 tasks={_.filter(
                   this.props.tasks,
                   task => task.status === STATUS_NEW
@@ -53,7 +49,7 @@ class TaskPage extends Component {
             </Grid>
             <Grid item xs={4}>
               <ListTask
-                status={STATUS_IN_PROGRESS}
+                status="Doing"
                 tasks={_.filter(
                   this.props.tasks,
                   task => task.status === STATUS_IN_PROGRESS
@@ -63,7 +59,7 @@ class TaskPage extends Component {
             </Grid>
             <Grid item xs={4}>
               <ListTask
-                status={STATUS_COMPLETED}
+                status="Completed"
                 tasks={_.filter(
                   this.props.tasks,
                   task => task.status === STATUS_COMPLETED
