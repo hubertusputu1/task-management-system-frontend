@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField } from '@material-ui/core';
 
-import { mapDispatch, mapState } from './newComment.controller';
+import { mapDispatch, mapState } from './inputComment.controller';
 
 const styles = theme => ({
   textField: {
@@ -11,7 +11,7 @@ const styles = theme => ({
   },
 });
 
-class NewComment extends Component {
+class InputComment extends Component {
   constructor(props) {
     super(props);
 
@@ -64,4 +64,4 @@ class NewComment extends Component {
 export default connect(
   mapState,
   mapDispatch
-)(withStyles(styles)(NewComment));
+)(withStyles(styles)(InputComment));

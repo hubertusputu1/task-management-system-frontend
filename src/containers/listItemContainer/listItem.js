@@ -15,7 +15,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import { mapDispatch, mapState } from './listItem.controller';
 import ListComment from './listComment';
-import NewComment from './newComment';
+import InputComment from './inputComment';
 import Task from './task';
 
 import DialogComponent from '../../components/dialog';
@@ -141,7 +141,7 @@ class ListItemContainer extends Component {
           <ListComment user={user} taskId={task._id} />
         </Grid>
         <Grid item xs={12}>
-          <NewComment user={user} taskId={task._id} />
+          <InputComment user={user} taskId={task._id} />
         </Grid>
       </Grid>
     );
