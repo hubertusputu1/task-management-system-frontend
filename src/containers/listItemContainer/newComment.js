@@ -32,6 +32,7 @@ class NewComment extends Component {
 
   createComment = () => {
     const { comment } = this.state;
+    if (!comment) return;
     const { taskId, user, createComment } = this.props;
     createComment({
       text: comment,

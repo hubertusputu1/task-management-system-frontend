@@ -18,11 +18,16 @@ class ListComment extends Component {
   };
 
   render() {
-    const { taskId } = this.props;
+    const { taskId, user } = this.props;
 
     return this.props.comments.length > 0
       ? this.props.comments.map(comment => (
-          <Comment comment={comment} taskId={taskId} key={comment._id} />
+          <Comment
+            comment={comment}
+            token={user.token}
+            taskId={taskId}
+            key={comment._id}
+          />
         ))
       : 'Currently there is no comment on this task';
   }
