@@ -24,6 +24,9 @@ const styles = theme => ({
     backgroundColor: 'inherit',
     padding: 0,
   },
+  subHeader: {
+    textAlign: 'center',
+  },
 });
 
 class ListTask extends Component {
@@ -38,7 +41,7 @@ class ListTask extends Component {
       <List className={classes.root} subheader={<li />}>
         <li key={`li-${status}`} className={classes.listSection}>
           <ul key={`ul-${status}`} className={classes.ul}>
-            <ListSubheader>
+            <ListSubheader className={classes.subHeader}>
               <div>{status} Tasks</div>
             </ListSubheader>
             {tasks.map(task => (
