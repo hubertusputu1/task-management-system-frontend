@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import IconButton from '@material-ui/core/IconButton';
+import {
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton,
+  Button,
+  Grid,
+  Typography,
+} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 
 import { mapDispatch, mapState } from './listItem.controller';
+import ListComment from './listComment';
+import NewComment from './newComment';
+import Task from './task';
 
 import DialogComponent from '../../components/dialog';
 import TextField from '../../components/textField';
@@ -37,6 +43,8 @@ class ListItemContainer extends Component {
       createdBy: '',
       open: false,
       setOpen: false,
+      openView: false,
+      setOpenView: false,
       status: STATUS_NEW,
     };
   }
@@ -119,6 +127,26 @@ class ListItemContainer extends Component {
     );
   };
 
+  dialogBodyView = () => {
+    const { task, user } = this.props;
+    return (
+      <Grid container spacing={1}>
+        <Grid item xs={12}>
+          <Task task={task} />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography component="p">Comments:</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <ListComment user={user} taskId={task._id} />
+        </Grid>
+        <Grid item xs={12}>
+          <NewComment user={user} taskId={task._id} />
+        </Grid>
+      </Grid>
+    );
+  };
+
   dialogActions = (
     <div>
       <Button onClick={() => this.handleCloseModal()} color="primary">
@@ -154,6 +182,22 @@ class ListItemContainer extends Component {
     return this.resetState();
   };
 
+  handleOpenViewModal = () => {
+    const { title, description, assignedTo, status } = this.props.task;
+    this.setState({
+      setOpenView: true,
+      openView: true,
+      title,
+      description,
+      assignedTo,
+      status,
+    });
+  };
+
+  handleCloseViewModal = async isProcess => {
+    return this.resetState();
+  };
+
   handleChange = (name, event) => {
     this.setState({ ...this.state, [name]: event.target.value });
   };
@@ -166,6 +210,8 @@ class ListItemContainer extends Component {
       createdBy: '',
       open: false,
       setOpen: false,
+      openView: false,
+      setOpenView: false,
       status: STATUS_NEW,
     });
   };
@@ -173,7 +219,12 @@ class ListItemContainer extends Component {
   render() {
     const { classes, task, user } = this.props;
     return (
-      <ListItem className={classes.listItem} key={task._id} button>
+      <ListItem
+        className={classes.listItem}
+        key={task._id}
+        button
+        onClick={() => this.handleOpenViewModal(true)}
+      >
         <ListItemText primary={task.title} />
         <ListItemSecondaryAction>
           <IconButton
@@ -201,6 +252,13 @@ class ListItemContainer extends Component {
             title="Edit Task"
             actions={this.dialogActions}
             body={this.dialogBody()}
+          />
+          <DialogComponent
+            handleClose={this.handleCloseViewModal}
+            open={this.state.openView}
+            id="task-view-modal"
+            title="Task Detail"
+            body={this.dialogBodyView()}
           />
         </ListItemSecondaryAction>
       </ListItem>

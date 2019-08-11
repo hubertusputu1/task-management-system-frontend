@@ -179,7 +179,7 @@ class ListTask extends Component {
           <ul key={`ul-${status}`} className={classes.ul}>
             <ListSubheader>
               <div>
-                {status} tasks
+                {status} Tasks
                 <IconButton
                   edge="end"
                   aria-label="comments"

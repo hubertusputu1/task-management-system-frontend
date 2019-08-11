@@ -48,7 +48,7 @@ export function* fetchComment(action) {
     const comments = yield call(commentFetchAPI, action.payload);
     yield put({
       type: COMMENT_FETCH_SUCCESS,
-      payload: { message: 'success', comments },
+      payload: { message: 'success', comments: comments.comments },
     });
   } catch (error) {
     yield put({
