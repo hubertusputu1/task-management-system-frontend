@@ -11,12 +11,16 @@ import {
   USER_SIGN_IN_FAILED,
   USER_SIGN_OUT_SUCCESS,
   USER_SIGN_OUT_FAILED,
+  USER_FETCH,
+  USER_FETCH_FAILED,
+  USER_FETCH_SUCCESS,
 } from '../type/user.type';
 
 const initialState = {
   loading: false,
   user: {},
   message: null,
+  users: [],
 };
 
 const persistConfig = {
@@ -77,6 +81,25 @@ export default persistReducer(persistConfig, (state = initialState, action) => {
         user: action.payload.user,
       };
     case USER_SIGN_OUT_FAILED:
+      return {
+        ...state,
+        loading: false,
+        message: action.payload.message,
+      };
+
+    case USER_FETCH:
+      return {
+        ...state,
+        loading: true,
+      };
+    case USER_FETCH_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: action.payload.message,
+        users: action.payload.users,
+      };
+    case USER_FETCH_FAILED:
       return {
         ...state,
         loading: false,

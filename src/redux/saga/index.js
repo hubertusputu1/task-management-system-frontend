@@ -1,6 +1,11 @@
 import { all, takeLatest } from 'redux-saga/effects';
 
-import { USER_SIGN_UP, USER_SIGN_IN, USER_SIGN_OUT } from '../type/user.type';
+import {
+  USER_SIGN_UP,
+  USER_SIGN_IN,
+  USER_SIGN_OUT,
+  USER_FETCH,
+} from '../type/user.type';
 import {
   TASK_CREATE,
   TASK_DELETE,
@@ -12,7 +17,12 @@ import {
   COMMENT_DELETE,
   COMMENT_FETCH,
 } from '../type/comment.type';
-import { userSignUp, userSignIn, userSignOut } from '../saga/user.saga';
+import {
+  userSignUp,
+  userSignIn,
+  userSignOut,
+  userFetch,
+} from '../saga/user.saga';
 import { createTask, editTask, deleteTask, fetchTask } from '../saga/task.saga';
 import {
   createComment,
@@ -25,6 +35,7 @@ export default function* IndexSaga() {
     takeLatest(USER_SIGN_UP, userSignUp),
     takeLatest(USER_SIGN_IN, userSignIn),
     takeLatest(USER_SIGN_OUT, userSignOut),
+    takeLatest(USER_FETCH, userFetch),
     takeLatest(TASK_FETCH, fetchTask),
     takeLatest(TASK_CREATE, createTask),
     takeLatest(TASK_EDIT, editTask),

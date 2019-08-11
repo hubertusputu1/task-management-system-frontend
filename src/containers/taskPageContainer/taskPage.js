@@ -30,8 +30,15 @@ class TaskPage extends Component {
     fetchTask({ token: user.token });
   };
 
+  fetchUsers = () => {
+    const { user, userFetch } = this.props;
+
+    userFetch({ token: user.token });
+  };
+
   componentDidMount = () => {
     this.fetchTasks();
+    this.fetchUsers();
   };
 
   render() {
