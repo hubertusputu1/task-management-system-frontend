@@ -24,7 +24,7 @@ class ListComment extends Component {
       ? this.props.comments.map(comment => (
           <Comment
             comment={comment}
-            token={user.token}
+            user={user}
             taskId={taskId}
             key={comment._id}
           />

@@ -7,6 +7,8 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import { mapDispatch, mapState } from './comment.controller';
 
+import { USER_ROLES_ADMIN } from '../../constants/user.constant';
+
 const styles = theme => ({
   root: {
     padding: theme.spacing(3, 2),
@@ -21,24 +23,28 @@ class CommentComponent extends Component {
   // }
 
   deleteComment = _id => {
-    const { deleteComment, token } = this.props;
-    deleteComment({ _id, token });
+    const { deleteComment, user } = this.props;
+    deleteComment({ _id, token: user.token });
   };
 
   render() {
-    const { classes, comment } = this.props;
+    const { classes, comment, user } = this.props;
 
     return (
       <div>
         <Paper className={classes.root}>
-          <IconButton
-            edge="end"
-            aria-label="edit"
-            style={{ float: 'right' }}
-            onClick={() => this.deleteComment(comment._id)}
-          >
-            <CloseIcon />
-          </IconButton>
+          {user.userRole === USER_ROLES_ADMIN ? (
+            <IconButton
+              edge="end"
+              aria-label="edit"
+              style={{ float: 'right' }}
+              onClick={() => this.deleteComment(comment._id)}
+            >
+              <CloseIcon />
+            </IconButton>
+          ) : (
+            ''
+          )}
           <Typography component="h6">Creator</Typography>
           <Typography component="p">{comment.text}</Typography>
           <Typography variant="caption" gutterBottom>
