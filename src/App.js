@@ -72,7 +72,7 @@ class App extends Component {
           {...props}
           title={TITLE_MAIN}
           buttonText={TEXT_SIGN_OUT}
-          enableMenu={true}
+          enableMenu={false}
           onClickFunction={() => this.props.userSignOut(this.props.user.token)}
         />
         <TaskPage {...props} user={this.props.user} />
