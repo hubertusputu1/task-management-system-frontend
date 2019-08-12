@@ -14,6 +14,7 @@ import {
   USER_FETCH,
   USER_FETCH_FAILED,
   USER_FETCH_SUCCESS,
+  USER_RESET_MESSAGE,
 } from '../type/user.type';
 
 const initialState = {
@@ -104,6 +105,12 @@ export default persistReducer(persistConfig, (state = initialState, action) => {
         ...state,
         loading: false,
         message: action.payload.message,
+      };
+    case USER_RESET_MESSAGE:
+      return {
+        ...state,
+        loading: false,
+        message: '',
       };
     default:
       return state;

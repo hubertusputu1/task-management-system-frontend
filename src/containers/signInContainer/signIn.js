@@ -7,7 +7,12 @@ import Paper from '../../components/paper';
 import TextField from '../../components/textField';
 import Typography from '../../components/typography';
 import Button from '../../components/button';
-import { VARIANT_H6, TEXT_SIGN_IN } from '../../constants/typography.constant';
+import DialogComponent from '../../components/dialog';
+import {
+  VARIANT_H6,
+  VARIANT_BODY1,
+  TEXT_SIGN_IN,
+} from '../../constants/typography.constant';
 import { COLOR_PRIMARY } from '../../constants/color.constant';
 import { VARIANT_BUTTON_CONTAINED } from '../../constants/button.constant';
 
@@ -18,8 +23,38 @@ class SignIn extends Component {
     this.state = {
       email: '',
       password: '',
+      open: false,
+      setOpen: false,
+      message: '',
     };
   }
+
+  dialogActions = () => {
+    return (
+      <div>
+        <Button
+          color={COLOR_PRIMARY}
+          childElement="Ok"
+          variant={VARIANT_BUTTON_CONTAINED}
+          onClickFunction={() => this.handleCloseModal()}
+        />
+      </div>
+    );
+  };
+
+  dialogBody = () => {
+    const { message } = this.state;
+
+    return <Typography variant={VARIANT_BODY1} text={message} />;
+  };
+
+  handleOpenModal = message => {
+    this.setState({ setOpen: true, open: true, message });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ open: false, setOpen: false, message: '' });
+  };
 
   handleChange = (name, event) => {
     this.setState({ ...this.state, [name]: event.target.value });
@@ -36,12 +71,21 @@ class SignIn extends Component {
     const { userSignIn } = this.props;
 
     if (!email) {
-      return alert("email can't be empty");
+      return this.handleOpenModal("Email can't be empty");
     }
     if (!password) {
-      return alert("password can't be empty");
+      return this.handleOpenModal("Password can't be empty");
     }
     userSignIn({ email, password });
+  };
+
+  componentWillReceiveProps = nextProps => {
+    const { userResetMessage } = this.props;
+    const { message } = nextProps;
+    if (message === 'error') {
+      this.handleOpenModal('Please check your username or password');
+      userResetMessage();
+    }
   };
 
   render() {
@@ -76,6 +120,14 @@ class SignIn extends Component {
     return (
       <div style={{ width: '30%', margin: 'auto', marginTop: '2em' }}>
         <Paper childElement={childElement} />
+        <DialogComponent
+          handleClose={this.handleCloseModal}
+          open={this.state.open}
+          id="task-modal"
+          title="Sign In"
+          actions={this.dialogActions()}
+          body={this.dialogBody()}
+        />
       </div>
     );
   }

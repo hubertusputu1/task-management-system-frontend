@@ -1,4 +1,4 @@
-import { userSignIn } from '../../redux/action/user.action';
+import { userSignIn, userResetMessage } from '../../redux/action/user.action';
 
 export const mapState = state => {
   return {
@@ -9,5 +9,6 @@ export const mapState = state => {
 export const mapDispatch = (dispatch, props) => {
   return {
     userSignIn: data => dispatch(userSignIn(data)),
+    userResetMessage: () => dispatch(userResetMessage()),
   };
 };

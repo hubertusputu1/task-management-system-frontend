@@ -3,6 +3,7 @@ import {
   USER_SIGN_IN,
   USER_SIGN_OUT,
   USER_FETCH,
+  USER_RESET_MESSAGE,
 } from '../type/user.type';
 
 export const userSignUp = data => {
@@ -30,5 +31,11 @@ export const userSignOut = data => {
   return {
     type: USER_SIGN_OUT,
     payload: data,
+  };
+};
+
+export const userResetMessage = () => {
+  return {
+    type: USER_RESET_MESSAGE,
   };
 };
