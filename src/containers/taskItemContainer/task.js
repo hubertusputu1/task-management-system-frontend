@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import { connect } from 'react-redux';
+import _ from 'lodash';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+
+import { mapDispatch, mapState } from './task.controller';
 
 const styles = theme => ({
   root: {
@@ -15,6 +19,12 @@ class TaskComponent extends Component {
   // constructor(props) {
   //   super(props);
   // }
+
+  getUser = id => {
+    if (!id) return null;
+    const { users } = this.props;
+    return _.find(users, { _id: id }).name;
+  };
 
   render() {
     const { classes, task } = this.props;
@@ -30,7 +40,10 @@ class TaskComponent extends Component {
             Created At: {moment(task.createdAt).toString()}
           </Typography>
           <Typography component="p">
-            Assigned To: {task.assignedTo ? task.assignedTo : 'not assigned'}
+            Assigned To:{' '}
+            {this.getUser(task.assignedTo)
+              ? this.getUser(task.assignedTo)
+              : 'not assigned'}
           </Typography>
         </Paper>
       </div>
@@ -38,4 +51,7 @@ class TaskComponent extends Component {
   }
 }
 
-export default withStyles(styles)(TaskComponent);
+export default connect(
+  mapState,
+  mapDispatch
+)(withStyles(styles)(TaskComponent));

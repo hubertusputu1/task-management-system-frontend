@@ -6,7 +6,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 
 import { mapDispatch, mapState } from './listTask.controller';
 
-import ListItem from '../listItemContainer';
+import TaskItem from '../taskItemContainer';
 
 const styles = theme => ({
   root: {
@@ -45,7 +45,7 @@ class ListTask extends Component {
               <div>{status} Tasks</div>
             </ListSubheader>
             {tasks.map(task => (
-              <ListItem task={task} key={task._id} user={user} />
+              <TaskItem task={task} key={task._id} user={user} />
             ))}
           </ul>
         </li>

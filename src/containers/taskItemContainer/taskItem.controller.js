@@ -1,7 +1,9 @@
 import { deleteTask, editTask } from '../../redux/action/task.action';
 
 export const mapState = state => {
-  return {};
+  return {
+    users: state.user.users,
+  };
 };
 
 export const mapDispatch = (dispatch, props) => {

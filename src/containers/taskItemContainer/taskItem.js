@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import {
@@ -13,7 +14,7 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
-import { mapDispatch, mapState } from './listItem.controller';
+import { mapDispatch, mapState } from './taskItem.controller';
 import ListComment from './listComment';
 import InputComment from './inputComment';
 import Task from './task';
@@ -32,15 +33,16 @@ import { USER_ROLES_ADMIN } from '../../constants/user.constant';
 
 const styles = theme => ({});
 
-class ListItemContainer extends Component {
+class TaskItemContainer extends Component {
   constructor(props) {
     super(props);
+    const { task } = this.props;
 
     this.state = {
-      title: '',
-      description: '',
-      assignedTo: '',
-      createdBy: '',
+      title: task.title,
+      description: task.description,
+      assignedTo: task.assignedTo || '',
+      createdBy: task.createdBy,
       open: false,
       setOpen: false,
       openView: false,
@@ -69,7 +71,9 @@ class ListItemContainer extends Component {
   };
 
   dialogBody = () => {
-    const { title, description, status, assignedTo, createdBy } = this.state;
+    const { title, description, status, assignedTo } = this.state;
+
+    const { users } = this.props;
     const statusList = [
       {
         value: STATUS_NEW,
@@ -85,7 +89,9 @@ class ListItemContainer extends Component {
       },
     ];
 
-    const userList = [];
+    const userList = _.map(users, user => {
+      return { value: user._id, name: user.name };
+    });
 
     return (
       <Grid container spacing={1}>
@@ -118,7 +124,7 @@ class ListItemContainer extends Component {
           <Select
             id="assignedTo"
             name="Assign To"
-            value={assignedTo}
+            value={assignedTo || ''}
             onChangeFunction={e => this.handleChange('assignedTo', e)}
             menuItems={userList}
           />
@@ -174,8 +180,8 @@ class ListItemContainer extends Component {
     });
   };
 
-  handleCloseModal = async isProcess => {
-    if (isProcess) {
+  handleCloseModal = async isSaved => {
+    if (isSaved === true) {
       await this.editTask();
       this.resetState();
     }
@@ -269,4 +275,4 @@ class ListItemContainer extends Component {
 export default connect(
   mapState,
   mapDispatch
-)(withStyles(styles)(ListItemContainer));
+)(withStyles(styles)(TaskItemContainer));

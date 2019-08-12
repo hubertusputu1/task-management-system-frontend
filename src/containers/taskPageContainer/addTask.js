@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Grid, Fab, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -54,7 +55,9 @@ class AddTask extends Component {
   );
 
   dialogBody = () => {
-    const { title, description, status, assignedTo, createdBy } = this.state;
+    const { title, description, status, assignedTo } = this.state;
+    const { users } = this.props;
+    if (!users) return;
     const statusList = [
       {
         value: STATUS_NEW,
@@ -70,7 +73,9 @@ class AddTask extends Component {
       },
     ];
 
-    const userList = [];
+    const userList = _.map(users, user => {
+      return { value: user._id, name: user.name };
+    });
 
     return (
       <Grid container spacing={1}>
@@ -134,8 +139,8 @@ class AddTask extends Component {
     this.setState({ setOpen: true, open: true });
   };
 
-  handleCloseModal = async status => {
-    if (status) {
+  handleCloseModal = async isSaved => {
+    if (isSaved === true) {
       await this.createTask();
       this.resetState();
     }
