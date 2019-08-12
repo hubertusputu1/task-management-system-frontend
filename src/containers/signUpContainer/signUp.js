@@ -9,7 +9,12 @@ import TextField from '../../components/textField';
 import Typography from '../../components/typography';
 import Button from '../../components/button';
 import Select from '../../components/select';
-import { VARIANT_H6, TEXT_SIGN_UP } from '../../constants/typography.constant';
+import DialogComponent from '../../components/dialog';
+import {
+  VARIANT_H6,
+  VARIANT_BODY1,
+  TEXT_SIGN_UP,
+} from '../../constants/typography.constant';
 import { COLOR_PRIMARY } from '../../constants/color.constant';
 import { VARIANT_BUTTON_CONTAINED } from '../../constants/button.constant';
 import {
@@ -27,8 +32,42 @@ class SignUp extends Component {
       password: '',
       confirmPassword: '',
       userRole: USER_ROLES_ADMIN,
+      setOpen: false,
+      open: false,
+      message: '',
     };
   }
+
+  dialogActions = () => {
+    return (
+      <div>
+        <Button
+          color={COLOR_PRIMARY}
+          childElement="Ok"
+          variant={VARIANT_BUTTON_CONTAINED}
+          onClickFunction={() => this.handleCloseModal()}
+        />
+      </div>
+    );
+  };
+
+  dialogBody = () => {
+    const { message } = this.state;
+
+    return <Typography variant={VARIANT_BODY1} text={message} />;
+  };
+
+  handleChange = (name, event) => {
+    this.setState({ ...this.state, [name]: event.target.value });
+  };
+
+  handleOpenModal = message => {
+    this.setState({ setOpen: true, open: true, message });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ open: false, setOpen: false, message: '' });
+  };
 
   handleChange = (name, event) => {
     this.setState({ ...this.state, [name]: event.target.value });
@@ -39,16 +78,16 @@ class SignUp extends Component {
     const { userSignUp } = this.props;
 
     if (!name || !email || !password || !confirmPassword) {
-      return alert("all fields can't be empty");
+      return this.handleOpenModal("all fields can't be empty");
     }
     if (!EmailValidator.validate(email)) {
-      return alert('email must be valid');
+      return this.handleOpenModal('email must be valid');
     }
     if (password !== confirmPassword) {
-      return alert("password doesn't match");
+      return this.handleOpenModal("password doesn't match");
     }
     userSignUp({ name, email, password, userRole });
-    alert('user created');
+    return this.handleOpenModal('User Created', true);
   };
 
   render() {
@@ -112,6 +151,14 @@ class SignUp extends Component {
     return (
       <div style={{ width: '30%', margin: 'auto', marginTop: '2em' }}>
         <Paper childElement={childElement} />
+        <DialogComponent
+          handleClose={this.handleCloseModal}
+          open={this.state.open}
+          id="task-modal"
+          title="Sign Up"
+          actions={this.dialogActions()}
+          body={this.dialogBody()}
+        />
       </div>
     );
   }

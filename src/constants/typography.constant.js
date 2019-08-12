@@ -6,6 +6,7 @@ module.exports = {
   VARIANT_H4: 'h4',
   VARIANT_H5: 'h5',
   VARIANT_H6: 'h6',
+  VARIANT_BODY1: 'body1',
 
   TEXT_SIGN_IN: 'Sign In',
   TEXT_SIGN_UP: 'Sign Up',
