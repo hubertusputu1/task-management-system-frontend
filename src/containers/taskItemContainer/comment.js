@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
@@ -27,6 +28,12 @@ class CommentComponent extends Component {
     deleteComment({ _id, token: user.token });
   };
 
+  getUser = id => {
+    if (!id) return null;
+    const { users } = this.props;
+    return _.find(users, { _id: id }).name;
+  };
+
   render() {
     const { classes, comment, user } = this.props;
 
@@ -45,7 +52,7 @@ class CommentComponent extends Component {
           ) : (
             ''
           )}
-          <Typography component="h6">Creator</Typography>
+          <Typography component="h6">{this.getUser(comment.userId)}</Typography>
           <Typography component="p">{comment.text}</Typography>
           <Typography variant="caption" gutterBottom>
             {moment(comment.createdAt).toString()}
