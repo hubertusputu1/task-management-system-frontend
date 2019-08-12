@@ -15,6 +15,7 @@ import {
   VARIANT_BODY1,
   TEXT_SIGN_UP,
 } from '../../constants/typography.constant';
+import { PATH_SIGN_IN } from '../../constants/path.constant';
 import { COLOR_PRIMARY } from '../../constants/color.constant';
 import { VARIANT_BUTTON_CONTAINED } from '../../constants/button.constant';
 import {
@@ -57,10 +58,6 @@ class SignUp extends Component {
     return <Typography variant={VARIANT_BODY1} text={message} />;
   };
 
-  handleChange = (name, event) => {
-    this.setState({ ...this.state, [name]: event.target.value });
-  };
-
   handleOpenModal = message => {
     this.setState({ setOpen: true, open: true, message });
   };
@@ -87,7 +84,8 @@ class SignUp extends Component {
       return this.handleOpenModal("password doesn't match");
     }
     userSignUp({ name, email, password, userRole });
-    return this.handleOpenModal('User Created', true);
+    this.handleOpenModal('User Created', true);
+    setTimeout(() => this.props.history.push(PATH_SIGN_IN), 1000);
   };
 
   render() {
