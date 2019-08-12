@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Grid, Fab, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
