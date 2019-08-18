@@ -20,6 +20,8 @@ const styles = theme => ({
     width: '97%',
     margin: 'auto',
     marginTop: '2em',
+    display: 'flex',
+    justifyContent: 'space-between',
   },
 });
 
@@ -44,40 +46,34 @@ class TaskPage extends Component {
   render() {
     const { user, classes } = this.props;
     return (
-      <div className={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs={4}>
-            <ListTask
-              status="New"
-              tasks={_.filter(
-                this.props.tasks,
-                task => task.status === STATUS_NEW
-              )}
-              user={user}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <ListTask
-              status="Doing"
-              tasks={_.filter(
-                this.props.tasks,
-                task => task.status === STATUS_IN_PROGRESS
-              )}
-              user={user}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <ListTask
-              status="Completed"
-              tasks={_.filter(
-                this.props.tasks,
-                task => task.status === STATUS_COMPLETED
-              )}
-              user={user}
-            />
-          </Grid>
-          <AddTask user={user} />
-        </Grid>
+      <div>
+        <div className={classes.root}>
+          <ListTask
+            status="New"
+            tasks={_.filter(
+              this.props.tasks,
+              task => task.status === STATUS_NEW
+            )}
+            user={user}
+          />
+          <ListTask
+            status="Doing"
+            tasks={_.filter(
+              this.props.tasks,
+              task => task.status === STATUS_IN_PROGRESS
+            )}
+            user={user}
+          />
+          <ListTask
+            status="Completed"
+            tasks={_.filter(
+              this.props.tasks,
+              task => task.status === STATUS_COMPLETED
+            )}
+            user={user}
+          />
+        </div>
+        <AddTask user={user} />
       </div>
     );
   }
